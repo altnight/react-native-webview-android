@@ -59,6 +59,13 @@ var WebViewAndroid = React.createClass({
       null
     );
   },
+  stopLoading: function() {
+    RCTUIManager.dispatchViewManagerCommand(
+      this._getWebViewHandle(),
+      RCTUIManager.RNWebViewAndroid.Commands.stopLoading,
+      null
+    );
+  },
   render: function() {
     return <RNWebViewAndroid ref={WEBVIEW_REF} {...this.props} onNavigationStateChange={this._onNavigationStateChange} />;
   },
