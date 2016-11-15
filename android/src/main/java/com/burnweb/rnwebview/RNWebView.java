@@ -44,6 +44,7 @@ class RNWebView extends WebView implements LifecycleEventListener {
 
         public void onPageFinished(WebView view, String url) {
             mEventDispatcher.dispatchEvent(new NavigationStateChangeEvent(getId(), SystemClock.nanoTime(), view.getTitle(), false, url, view.canGoBack(), view.canGoForward()));
+            mEventDispatcher.dispatchEvent(new LoadEndEvent(getId(), SystemClock.nanoTime(), view.getTitle(), false, url, view.canGoBack(), view.canGoForward()));
 
             if(RNWebView.this.getInjectedJavaScript() != null) {
                 view.loadUrl("javascript:(function() {\n" + RNWebView.this.getInjectedJavaScript() + ";\n})();");
@@ -51,6 +52,7 @@ class RNWebView extends WebView implements LifecycleEventListener {
         }
 
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            mEventDispatcher.dispatchEvent(new LoadStartEvent(getId(), SystemClock.nanoTime(), view.getTitle(), true, url, view.canGoBack(), view.canGoForward()));
             mEventDispatcher.dispatchEvent(new NavigationStateChangeEvent(getId(), SystemClock.nanoTime(), view.getTitle(), true, url, view.canGoBack(), view.canGoForward()));
         }
     }
