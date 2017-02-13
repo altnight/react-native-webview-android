@@ -87,6 +87,8 @@ class RNWebView extends WebView implements LifecycleEventListener {
     public RNWebView(RNWebViewManager viewManager, ThemedReactContext reactContext) {
         super(reactContext);
 
+        reactContext.addLifecycleEventListener(this);
+
         mViewManager = viewManager;
         mEventDispatcher = reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher();
 
@@ -161,7 +163,7 @@ class RNWebView extends WebView implements LifecycleEventListener {
 
     @Override
     public void onHostPause() {
-
+      this.onPause();
     }
 
     @Override
