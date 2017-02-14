@@ -158,12 +158,12 @@ class RNWebView extends WebView implements LifecycleEventListener {
 
     @Override
     public void onHostResume() {
-
+        this.onResume();
     }
 
     @Override
     public void onHostPause() {
-      this.onPause();
+        this.onPause();
     }
 
     @Override
